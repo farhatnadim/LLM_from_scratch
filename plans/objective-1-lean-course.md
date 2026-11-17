@@ -8,7 +8,7 @@
 | Date | 2026-11-16 |
 | Requirements | [`docs/requirements.md`](../docs/requirements.md) |
 | Specification | [`docs/specification.md`](../docs/specification.md) |
-| Status | Plan. No lesson is written. |
+| Status | In progress. M0 (foundation) and M1a (lessons L01 to L07) are delivered. |
 
 ## 1. What you get
 

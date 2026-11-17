@@ -88,12 +88,16 @@ One lesson is one folder:
 
 ```
 LLM/L05_attention/
-├── README.md             lesson page: picture first, then one page
-├── attention.py          Python reference: complete, runs, writes the golden file
+├── README.md, figure.svg lesson page: picture first, then one page
+├── attention.py          Python reference: complete, runs; only what the lesson teaches
+├── golden.py             fixed inputs; runs the reference and writes the golden file
 ├── attention.hpp         C++ interface: declarations and doc comments
 ├── attention.cpp         C++ bodies: empty; the student writes them
 └── attention_test.cpp    C++ test: reads the golden file, calls the student code
 ```
+
+`tools/make_figures.py` draws all `figure.svg` files; some figures run the
+reference, so a picture agrees with the code.
 
 ![One session of two hours](img/lesson-loop.svg)
 
@@ -102,8 +106,8 @@ LLM/L05_attention/
 | Part | Writer | Rule |
 |------|--------|------|
 | Lesson page `README.md` | course | 60 lines maximum. Order: picture (SVG), idea (10 lines of mathematics maximum), "You write", "Check" (the test command), "Sources" (file and line in the two source courses). |
-| Python reference `.py` | course | Complete and runs. 150 lines maximum for each lesson. Imports: `torch`, the standard library, and earlier lessons. A comment gives the shape at each tensor line. No option that the lesson does not teach. |
-| Golden file | generated | The function `make_golden(out)` of the reference writes it with a fixed seed: input, weights, output. It goes to `data/goldens/<block>/<lesson>/`, not into git. `tools/make_goldens.py` makes all of them; CTest runs it before each test (fixture `goldens`) and it does no work when no reference changed. |
+| Python reference `.py` | course | Complete and runs. 150 lines maximum for each lesson. Imports: `torch`, the standard library, `course/py`, and earlier lessons. A comment gives the shape at each tensor line. No option that the lesson does not teach. |
+| Golden file | generated | `golden.py` of the lesson holds the fixed inputs; its function `make_golden(out)` runs the reference with a fixed seed and writes input, weights and output to `data/goldens/<block>/<lesson>/`, not into git. `tools/make_goldens.py` makes all of them; CTest runs it before each test (fixture `goldens`) and it does no work when no reference changed. |
 | C++ interface `.hpp` | course | Declarations only. Each function has a doc comment: purpose, shapes, behaviour, limits. |
 | C++ bodies `.cpp` | **student** | Each body starts as `COURSE_TODO("name");`. This macro throws `course::NotImplemented`. |
 | C++ test `_test.cpp` | course | Red before the student writes the body: the report is `not implemented: name`. Green after. |
@@ -120,7 +124,7 @@ the temporary solution.
 | Subject | Rule |
 |---------|------|
 | Device and type of the tests | CPU, `float32`. One smoke test for each block runs on the graphics processor. |
-| Limit, one module | Largest absolute difference 1e-6 or less. |
+| Limit, one module | Largest absolute difference 1e-6 or less. A test uses a larger limit only with its reason in a comment: RMSNorm 2e-6 (outputs reach 4, where 1e-6 is two float32 steps); RoPE 1e-5 (the angle grows with the position); two paths of one algorithm, such as manual and fused attention, 1e-5. |
 | Limit, full model | Largest absolute difference 1e-5 or less on the logits. |
 | Token ids, text, merges | Equal. |
 | Random numbers | A test does not depend on equal random streams. The golden file brings all weights. A sampling test compares the probabilities after the filters. |
@@ -137,7 +141,7 @@ end at this design: `minimind` `model/model_minimind.py` and
 | Part | Choice | Value |
 |------|--------|-------|
 | Tokens | Byte-level BPE, trained by the student | 6400 ids |
-| Embedding | Tied with the output head | 6400 × 768 |
+| Embedding | Tied with the output head: `logits = linear(h, embed_tokens.weight)`; the head has no parameter of its own | 6400 × 768 |
 | Position | RoPE on queries and keys | base 1e6 |
 | Normalization | RMSNorm before each sub-layer | eps 1e-6 |
 | Attention | Causal, grouped-query, RMSNorm on queries and keys, no bias | 8 query heads, 4 key-value heads, head size 96 |
@@ -148,11 +152,22 @@ end at this design: `minimind` `model/model_minimind.py` and
 | Optimizer | AdamW, cosine schedule `lr·(0.1 + 0.45·(1 + cos(π·step/total)))`, gradient clip 1.0, gradient accumulation, `bfloat16` | pre-training: lr 5e-4, batch 32 × 8 |
 | Generation | Temperature, top-k, top-p, KV cache | |
 
-Token ids: 0 to 255 are the bytes. Ids 256 to 527 are reserved: control
-tokens (`<|endoftext|>`, `<|im_start|>`, `<|im_end|>`, `<think>`,
-`</think>`, `<|image_pad|>`, spare ids) and 256 action tokens
-(`<|act_0|>` to `<|act_255|>`). Ids 528 to 6399 are the merges. Thus one
-tokenizer and one embedding table serve all blocks (R-1.7).
+Token ids: 0 to 255 are the bytes. Ids 256 to 271 are the control
+tokens: `<|endoftext|>` (256, padding), `<|im_start|>` (257),
+`<|im_end|>` (258), `<think>` (259), `</think>` (260), `<|image_pad|>`
+(261), `<|reserved_0|>` to `<|reserved_9|>` (262 to 271). Ids 272 to 527
+are the 256 action tokens `<|act_0|>` to `<|act_255|>`. Ids 528 to 6399
+are the merges. Thus one tokenizer and one embedding table serve all
+blocks (R-1.7). A pre-training sample is `<|im_start|>` + ids +
+`<|im_end|>`, as in minimind.
+
+Parameter names are the names of minimind and of Qwen3 in Hugging Face,
+without the prefix `model.`: `embed_tokens`, `layers.<i>.input_layernorm`,
+`layers.<i>.self_attn.{q,k,v,o}_proj`, `layers.<i>.self_attn.{q,k}_norm`,
+`layers.<i>.post_attention_layernorm`, `layers.<i>.mlp.{gate,up,down}_proj`,
+`norm`. The KV cache is one `LayerCache` (k, v) for each layer; the
+forward passes of attention, block and model take it as an optional
+argument, and lesson L07 writes its path.
 
 Pre-token rule of the tokenizer: the control tokens are cut out first.
 Then a pre-token is one optional space and a run of bytes that are not
