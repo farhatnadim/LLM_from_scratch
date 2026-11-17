@@ -1,0 +1,48 @@
+digraph model_growth {
+  graph [rankdir=LR, bgcolor="white", pad=0.3, nodesep=0.28, ranksep=0.5, fontname="Helvetica", labelloc=t, fontsize=18,
+         label="One model that grows: each block adds parts and keeps the parts before it"];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=12, color="#34495e", margin="0.14,0.09"];
+  edge  [fontname="Helvetica", fontsize=10, color="#34495e"];
+
+  // inputs
+  text  [label="Text", shape=plaintext, style="", fontsize=13];
+  image [label="Camera image", shape=plaintext, style="", fontsize=13];
+  state [label="State + noise", shape=plaintext, style="", fontsize=13];
+
+  // block 1
+  tok   [label="BPE tokenizer", fillcolor="#d6e6f5"];
+  emb   [label="Token embedding", fillcolor="#d6e6f5"];
+  trunk [label="Transformer x 8\nRMSNorm - RoPE - GQA attention - SwiGLU\nKV cache", fillcolor="#d6e6f5", margin="0.25,0.2"];
+  head  [label="Output head\n(tied with embedding)", fillcolor="#d6e6f5"];
+
+  // block 2
+  vit   [label="Vision encoder\npre-trained, frozen", fillcolor="#fde3c8"];
+  proj  [label="Projector\n64 image tokens", fillcolor="#fde3c8"];
+
+  // block 3
+  expert [label="Action expert\nflow matching", fillcolor="#d5f0dc"];
+
+  // outputs
+  out_text  [label="Answer text", shape=plaintext, style="", fontsize=13];
+  out_think [label="<think> reasoning </think>", shape=plaintext, style="", fontsize=13, fontcolor="#6c3483"];
+  out_act   [label="Action chunk", shape=plaintext, style="", fontsize=13];
+
+  text -> tok -> emb -> trunk -> head;
+  image -> vit -> proj -> trunk;
+  head -> out_text;
+  head -> out_think [color="#6c3483"];
+  trunk -> expert [label="prefix features"];
+  state -> expert;
+  out_think -> expert [style=dashed, color="#6c3483", label="reason, then act", fontcolor="#6c3483"];
+  expert -> out_act;
+
+  // legend
+  subgraph cluster_legend {
+    label="New in"; fontsize=11; style="rounded"; color="#bdc3c7";
+    l1 [label="Block 1  LLM", fillcolor="#d6e6f5", fontsize=10];
+    l2 [label="Block 2  VLM", fillcolor="#fde3c8", fontsize=10];
+    l3 [label="Block 3  VLA", fillcolor="#d5f0dc", fontsize=10];
+    l4 [label="Block 4  Reasoning", fillcolor="#e8daef", fontsize=10];
+    l1 -> l2 -> l3 -> l4 [style=invis];
+  }
+}
