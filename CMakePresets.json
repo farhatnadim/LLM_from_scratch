@@ -1,0 +1,48 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {"major": 3, "minor": 28, "patch": 0},
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "LIBTORCH_DIR": "${sourceDir}/.venv/lib/python3.13/site-packages/torch",
+        "COURSE_PYTHON": "${sourceDir}/.venv/bin/python"
+      }
+    },
+    {
+      "name": "clang",
+      "displayName": "Clang 21 (default)",
+      "inherits": "base",
+      "cacheVariables": {"CMAKE_CXX_COMPILER": "clang++"}
+    },
+    {
+      "name": "gcc",
+      "displayName": "GCC 15",
+      "inherits": "base",
+      "cacheVariables": {"CMAKE_CXX_COMPILER": "g++"}
+    }
+  ],
+  "buildPresets": [
+    {"name": "clang", "configurePreset": "clang"},
+    {"name": "gcc", "configurePreset": "gcc"}
+  ],
+  "testPresets": [
+    {
+      "name": "clang",
+      "configurePreset": "clang",
+      "output": {"outputOnFailure": true},
+      "execution": {"noTestsAction": "error"}
+    },
+    {
+      "name": "gcc",
+      "configurePreset": "gcc",
+      "output": {"outputOnFailure": true},
+      "execution": {"noTestsAction": "error"}
+    }
+  ]
+}
