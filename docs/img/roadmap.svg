@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 350" width="1040" height="350" font-family="Helvetica, Arial, sans-serif">
+<rect width="1040" height="350" fill="white"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#34495e"/></marker></defs>
+<text x="520.0" y="34" text-anchor="middle" font-size="20" fill="#1c2833">The shortest path: 14 sessions of two hours for each block</text>
+<text x="520.0" y="56" text-anchor="middle" font-size="13" fill="#566573">Read the Python reference. Write the C++. The test compares the two.</text>
+<rect x="30" y="78" width="225" height="164" rx="12" fill="#d6e6f5" stroke="#34495e" stroke-width="1.2"/>
+<text x="44" y="102" font-size="12" fill="#566573">Block 1 - weeks 1-2</text>
+<text x="44" y="130" font-size="24" font-weight="bold" fill="#1c2833">LLM</text>
+<text x="44" y="156" font-size="12.5" fill="#1c2833">- tokenizer</text>
+<text x="44" y="174" font-size="12.5" fill="#1c2833">- attention, RoPE, GQA</text>
+<text x="44" y="192" font-size="12.5" fill="#1c2833">- training, chat, think</text>
+<text x="44" y="214" font-size="10" fill="#566573">PRODUCT</text>
+<text x="44" y="230" font-size="12" font-style="italic" fill="#1c2833">A chat model that thinks</text>
+<rect x="30.0" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="46.3" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="62.6" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="78.9" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="95.1" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="111.4" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="127.7" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="144.0" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="160.3" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<circle cx="166.9" cy="280" r="4" fill="#6c3483"/>
+<rect x="176.6" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="192.9" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<circle cx="199.5" cy="280" r="4" fill="#6c3483"/>
+<rect x="209.1" y="254" width="13.3" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/>
+<rect x="225.4" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="241.7" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<path d="M256 153 l10 0" stroke="#34495e" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="267" y="78" width="225" height="164" rx="12" fill="#fde3c8" stroke="#34495e" stroke-width="1.2"/>
+<text x="281" y="102" font-size="12" fill="#566573">Block 2 - weeks 3-4</text>
+<text x="281" y="130" font-size="24" font-weight="bold" fill="#1c2833">VLM</text>
+<text x="281" y="156" font-size="12.5" fill="#1c2833">- vision encoder</text>
+<text x="281" y="174" font-size="12.5" fill="#1c2833">- projector, image tokens</text>
+<text x="281" y="192" font-size="12.5" fill="#1c2833">- two training stages</text>
+<text x="281" y="214" font-size="10" fill="#566573">PRODUCT</text>
+<text x="281" y="230" font-size="12" font-style="italic" fill="#1c2833">A model that answers about an image</text>
+<rect x="267.0" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="283.3" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="299.6" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="315.9" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="332.1" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="348.4" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="364.7" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<circle cx="371.4" cy="280" r="4" fill="#6c3483"/>
+<rect x="381.0" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<circle cx="387.6" cy="280" r="4" fill="#6c3483"/>
+<rect x="397.3" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="413.6" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="429.9" y="254" width="13.3" height="14" rx="3" fill="#fde3c8" stroke="#34495e" stroke-width="0.9"/>
+<rect x="446.1" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="462.4" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="478.7" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<path d="M493 153 l10 0" stroke="#34495e" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="504" y="78" width="225" height="164" rx="12" fill="#d5f0dc" stroke="#34495e" stroke-width="1.2"/>
+<text x="518" y="102" font-size="12" fill="#566573">Block 3 - weeks 5-6</text>
+<text x="518" y="130" font-size="24" font-weight="bold" fill="#1c2833">VLA</text>
+<text x="518" y="156" font-size="12.5" fill="#1c2833">- action tokens, decision text</text>
+<text x="518" y="174" font-size="12.5" fill="#1c2833">- flow-matching action expert</text>
+<text x="518" y="192" font-size="12.5" fill="#1c2833">- reason, then act</text>
+<text x="518" y="214" font-size="10" fill="#566573">PRODUCT</text>
+<text x="518" y="230" font-size="12" font-style="italic" fill="#1c2833">A model that reasons, then acts</text>
+<rect x="504.0" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="520.3" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="536.6" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="552.9" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<circle cx="559.5" cy="280" r="4" fill="#6c3483"/>
+<rect x="569.1" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="585.4" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="601.7" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<circle cx="608.4" cy="280" r="4" fill="#6c3483"/>
+<rect x="618.0" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="634.3" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="650.6" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="666.9" y="254" width="13.3" height="14" rx="3" fill="#d5f0dc" stroke="#34495e" stroke-width="0.9"/>
+<rect x="683.1" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="699.4" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="715.7" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<path d="M730 153 l10 0" stroke="#34495e" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="741" y="78" width="225" height="164" rx="12" fill="#e8daef" stroke="#34495e" stroke-width="1.2"/>
+<text x="755" y="102" font-size="12" fill="#566573">Block 4 - weeks 7-8</text>
+<text x="755" y="130" font-size="24" font-weight="bold" fill="#1c2833">Reasoning</text>
+<text x="755" y="156" font-size="12.5" fill="#1c2833">- answer checker</text>
+<text x="755" y="174" font-size="12.5" fill="#1c2833">- more compute at inference</text>
+<text x="755" y="192" font-size="12.5" fill="#1c2833">- reward training, distillation</text>
+<text x="755" y="214" font-size="10" fill="#566573">PRODUCT</text>
+<text x="755" y="230" font-size="12" font-style="italic" fill="#1c2833">Methods that make it reason better</text>
+<rect x="741.0" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="757.3" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="773.6" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="789.9" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="806.1" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="822.4" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="838.7" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="855.0" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="871.3" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="887.6" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="903.9" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="920.1" y="254" width="13.3" height="14" rx="3" fill="#e8daef" stroke="#34495e" stroke-width="0.9"/>
+<rect x="936.4" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="952.7" y="254" width="13.3" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/>
+<rect x="30" y="310" width="15" height="14" rx="3" fill="#d6e6f5" stroke="#34495e" stroke-width="0.9"/><text x="52" y="321.5" font-size="12" fill="#1c2833">lesson, one session</text>
+<rect x="200" y="310" width="15" height="14" rx="3" fill="white" stroke="#34495e" stroke-width="0.9" stroke-dasharray="3,2"/><text x="222" y="321.5" font-size="12" fill="#1c2833">reserve session</text>
+<circle cx="352" cy="317" r="4" fill="#6c3483"/><text x="363" y="321.5" font-size="12" fill="#1c2833">a training run starts and runs at night</text>
+<rect x="620" y="306" width="390" height="22" rx="6" fill="#f2f3f4" stroke="#aab7b8" stroke-dasharray="4,3"/><text x="630" y="321.5" font-size="12" fill="#566573">Block 5 - DiffusionVL: reserved, planned after block 3</text>
+</svg>

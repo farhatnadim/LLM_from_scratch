@@ -1,0 +1,31 @@
+digraph lesson_loop {
+  graph [rankdir=LR, bgcolor="white", pad=0.3, nodesep=0.35, ranksep=0.55, fontname="Helvetica", labelloc=t, fontsize=18,
+         label="One session of two hours"];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=12, color="#34495e", fillcolor="#eef3f8", margin="0.16,0.10"];
+  edge  [fontname="Helvetica", fontsize=10, color="#34495e"];
+
+  subgraph cluster_given {
+    label="Given by the course"; fontsize=12; style="rounded,dashed"; color="#7f8c8d"; fontcolor="#7f8c8d";
+    page   [label="1. Lesson page\npicture + one page", fillcolor="#fdf2d0"];
+    ref    [label="2. Python reference\ncomplete, runs", fillcolor="#fdf2d0"];
+    golden [label="Golden tensors\ninput, weights, output", shape=cylinder, fillcolor="#fdf2d0"];
+    hpp    [label="C++ interface\nnames, shapes, behaviour", fillcolor="#fdf2d0"];
+  }
+  subgraph cluster_student {
+    label="Written by the student"; fontsize=12; style="rounded,dashed"; color="#1e8449"; fontcolor="#1e8449";
+    cpp    [label="3. C++ bodies\nLibTorch", fillcolor="#d5f0dc"];
+  }
+  test   [label="4. Test\nC++ result = reference result?", shape=diamond, style="filled", fillcolor="#eef3f8", margin="0.02,0.02"];
+  done   [label="5. Commit\nnext lesson", fillcolor="#d5f0dc"];
+  train  [label="Training run\nat night, no attention", fillcolor="#e8daef"];
+
+  page -> ref [label="read"];
+  ref -> golden [label="writes", style=dashed];
+  ref -> cpp [label="same algorithm,\nother language"];
+  hpp -> cpp [label="fill in", style=dashed];
+  cpp -> test [label="build"];
+  golden -> test [style=dashed, label="reads"];
+  test -> cpp [label="red: fix", color="#c0392b", fontcolor="#c0392b"];
+  test -> done [label="green", color="#1e8449", fontcolor="#1e8449"];
+  done -> train [label="when the block\nhas a model", style=dashed];
+}

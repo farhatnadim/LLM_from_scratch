@@ -1,0 +1,2 @@
+name,location,summary,date,implemented,commit
+objective-1-lean-course,plans/objective-1-lean-course.md,"Lean course from LLM to VLM to VLA to reasoning: Python reference, C++ interfaces with empty bodies, tests that compare the two; delivered in merge requests, one week of lessons each",2026-11-16,no,
