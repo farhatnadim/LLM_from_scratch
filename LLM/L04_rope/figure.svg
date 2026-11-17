@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 380" width="940" height="380">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34495e"/></marker></defs>
+<rect width="940" height="380" fill="white"/>
+<text x="470.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" text-anchor="middle" fill="#1c2833">L04 RoPE: each pair of a head vector turns by an angle that grows with the position</text>
+<rect x="40.0" y="80.0" width="46.0" height="26.0" rx="4" fill="#d6e6f5" stroke="#34495e" stroke-width="1.0"/>
+<text x="63.0" y="97.5" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#1c2833">x0</text>
+<rect x="90.0" y="80.0" width="46.0" height="26.0" rx="4" fill="#d6e6f5" stroke="#34495e" stroke-width="1.0"/>
+<text x="113.0" y="97.5" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#1c2833">x1</text>
+<rect x="140.0" y="80.0" width="46.0" height="26.0" rx="4" fill="#d6e6f5" stroke="#34495e" stroke-width="1.0"/>
+<text x="163.0" y="97.5" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#1c2833">x2</text>
+<rect x="190.0" y="80.0" width="46.0" height="26.0" rx="4" fill="#d6e6f5" stroke="#34495e" stroke-width="1.0"/>
+<text x="213.0" y="97.5" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#1c2833">x3</text>
+<rect x="256.0" y="80.0" width="46.0" height="26.0" rx="4" fill="#fdf2d0" stroke="#34495e" stroke-width="1.0"/>
+<text x="279.0" y="97.5" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#1c2833">x4</text>
+<rect x="306.0" y="80.0" width="46.0" height="26.0" rx="4" fill="#fdf2d0" stroke="#34495e" stroke-width="1.0"/>
+<text x="329.0" y="97.5" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#1c2833">x5</text>
+<rect x="356.0" y="80.0" width="46.0" height="26.0" rx="4" fill="#fdf2d0" stroke="#34495e" stroke-width="1.0"/>
+<text x="379.0" y="97.5" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#1c2833">x6</text>
+<rect x="406.0" y="80.0" width="46.0" height="26.0" rx="4" fill="#fdf2d0" stroke="#34495e" stroke-width="1.0"/>
+<text x="429.0" y="97.5" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#1c2833">x7</text>
+<text x="138.0" y="70.0" font-family="Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle" fill="#566573">first half x1</text>
+<text x="356.0" y="70.0" font-family="Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle" fill="#566573">second half x2</text>
+<path d="M63 108 C63 128 279 128 279 108" stroke="#566573" fill="none" stroke-width="1.2"/>
+<path d="M113 108 C113 140 329 140 329 108" stroke="#566573" fill="none" stroke-width="1.2"/>
+<path d="M163 108 C163 152 379 152 379 108" stroke="#566573" fill="none" stroke-width="1.2"/>
+<path d="M213 108 C213 164 429 164 429 108" stroke="#566573" fill="none" stroke-width="1.2"/>
+<text x="40.0" y="172.0" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="start" fill="#566573">pair i = (x_i, x_i+D/2): head_dim / 2 pairs (here head_dim = 8: 4 pairs)</text>
+<text x="40.0" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="start" fill="#1c2833">θ_i = base^(-2i / head_dim);  angle of pair i at position p = p · θ_i</text>
+<text x="40.0" y="232.0" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="start" fill="#566573">pair 0 turns fastest, the last pair turns slowest</text>
+<text x="40.0" y="262.0" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13" text-anchor="start" fill="#1c2833">rotate_half([x1 | x2]) = [-x2 | x1]</text>
+<text x="40.0" y="286.0" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13" text-anchor="start" fill="#1c2833">rope(x) = x · cos + rotate_half(x) · sin</text>
+<text x="40.0" y="310.0" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="13" text-anchor="start" fill="#1c2833">cos, sin: tables [max_len, head_dim], made one time (rope_tables)</text>
+<line x1="585.0" y1="200.0" x2="855.0" y2="200.0" stroke="#eceff1" stroke-width="1.2"/>
+<line x1="720.0" y1="335.0" x2="720.0" y2="65.0" stroke="#eceff1" stroke-width="1.2"/>
+<path d="M835 200 A115 115 0 1 0 605 200 A115 115 0 1 0 835 200" stroke="#bfc9ca" fill="none" stroke-width="1.2"/>
+<text x="720.0" y="62.0" font-family="Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle" fill="#566573">one pair as a point in a plane</text>
+<line x1="720.0" y1="200.0" x2="828.1" y2="160.7" stroke="#566573" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="836.1" y="154.7" font-family="Helvetica, Arial, sans-serif" font-size="12" text-anchor="start" fill="#566573">position 0</text>
+<line x1="720.0" y1="200.0" x2="749.8" y2="88.9" stroke="#34495e" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="743.8" y="82.9" font-family="Helvetica, Arial, sans-serif" font-size="12" text-anchor="end" fill="#34495e">position p</text>
+<path d="M762.3 184.6 A45 45 0 0 0 731.6 156.5" stroke="#c0392b" fill="none" stroke-width="1.6"/>
+<text x="772.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="start" fill="#c0392b" font-weight="bold">p · θ_i</text>
+<text x="720.0" y="357.0" font-family="Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle" fill="#1c2833">q at position m, k at position n: q·k depends only on m − n</text>
+</svg>

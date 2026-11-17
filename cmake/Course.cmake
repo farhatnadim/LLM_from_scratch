@@ -40,4 +40,7 @@ function(course_test name)
         LABELS "${ARG_LABELS}"
         FIXTURES_REQUIRED "goldens;${ARG_FIXTURES}"
         WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
+    if(NOT ARG_FIXTURES)
+        set_tests_properties(${name} PROPERTIES FIXTURES_REQUIRED goldens)
+    endif()
 endfunction()

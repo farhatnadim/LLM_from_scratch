@@ -2,8 +2,9 @@
 
 Run:  uv run tools/make_goldens.py [--force]
 
-Each reference with a function make_golden(out) writes its files into
-data/goldens/<block>/<lesson>/. The C++ tests read them. CTest runs this
+The file golden.py of each lesson has a function make_golden(out). It runs the
+reference on fixed inputs and writes the files into data/goldens/<block>/<lesson>/.
+The C++ tests read them. CTest runs this
 program first (fixture "goldens"). It does no work when no reference changed.
 """
 
@@ -25,11 +26,11 @@ STAMP = GOLDENS / "stamp.txt"
 
 
 def references() -> list[tuple[str, str]]:
-    """(golden folder, module) for the smoke test and for each lesson reference."""
+    """(golden folder, module) for the smoke test and for each lesson."""
     found = [("smoke", "course.py.smoke")]
-    for py in sorted(ROOT.glob("*/L[0-9][0-9]_*/*.py")):
+    for py in sorted(ROOT.glob("*/L[0-9][0-9]_*/golden.py")):
         lesson = py.parent.relative_to(ROOT)                     # LLM/L03_rmsnorm_swiglu
-        found.append((lesson.as_posix(), ".".join((*lesson.parts, py.stem))))
+        found.append((lesson.as_posix(), ".".join((*lesson.parts, "golden"))))
     return found
 
 
@@ -57,8 +58,6 @@ def main() -> int:
 
     for folder, module_name in refs:
         module = importlib.import_module(module_name)
-        if not hasattr(module, "make_golden"):
-            continue
         out = GOLDENS / folder
         out.mkdir(parents=True, exist_ok=True)
         start = time.perf_counter()

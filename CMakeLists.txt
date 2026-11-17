@@ -22,3 +22,4 @@ add_test(NAME goldens
 set_tests_properties(goldens PROPERTIES FIXTURES_SETUP goldens LABELS "smoke")
 
 add_subdirectory(course/cpp)
+add_subdirectory(LLM)

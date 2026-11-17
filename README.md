@@ -65,6 +65,6 @@ The files go into `data/`, which is not in git. Each item has a pinned revision.
 |--------|---------|
 | `LLM/`, `VLM/`, `VLA/`, `Reasoning/`, `DiffusionVL/` | The blocks. One folder for each lesson. |
 | `course/cpp/`, `course/py/` | Shared helpers: golden files, tensor compare, arguments, CSV log. No model logic. |
-| `tools/` | `fetch_data.py`, `make_goldens.py` |
+| `tools/` | `fetch_data.py`, `make_goldens.py`, `make_figures.py` |
 | `cmake/` | LibTorch target, header-only libraries, test helpers |
 | `data/`, `runs/`, `build/` | Not in git: data, goldens, checkpoints, build trees |
