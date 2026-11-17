@@ -1,0 +1,27 @@
+[project]
+name = "llm-from-scratch"
+version = "0.1.0"
+description = "Python reference of the lean course: LLM, VLM, VLA, reasoning"
+readme = "README.md"
+requires-python = "==3.13.*"
+dependencies = [
+    "torch==2.15.0",          # also the LibTorch of the C++ side (docs/specification.md, S-1)
+    "numpy>=2.2",
+    "huggingface-hub>=0.30",  # tools/fetch_data.py
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["course"]
+
+[tool.hatch.build]
+# The editable install puts the repository root on sys.path.
+# Thus "import LLM.L03_rmsnorm_swiglu.rmsnorm_swiglu" works from any folder.
+dev-mode-dirs = ["."]
+
+[tool.uv]
+# R-7.1: the course runs on Linux.
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]

@@ -17,29 +17,29 @@ A fact with the mark ✔ was tested on the machine of the student on
 | Compilers | Clang 21 is the default: a rebuild after an edit takes 4 s ✔. GCC 15 also builds: 15 s ✔. | The two compile LibTorch headers at `-std=c++23` with no error ✔. |
 | Build | CMake 3.28 or above with presets, Ninja, a precompiled header for `<torch/torch.h>` | One translation unit that includes LibTorch compiles in 16 s without the precompiled header ✔. |
 | Python environment | `uv` with `pyproject.toml` and a lock file | The lock file pins PyTorch, and thus LibTorch. |
-| Tests | CTest starts the tests; doctest gives the test cases | doctest is one header. |
-| Small libraries | nlohmann/json (JSON), stb_image (JPEG and PNG) | Header-only. CMake `FetchContent` gets them at a pinned version. |
+| Tests | CTest starts the tests; doctest 2.5.3 gives the test cases ✔ | doctest is one header. |
+| Small libraries | nlohmann/json 3.12.0 (JSON) ✔; stb_image (JPEG and PNG) from block 2 | Header-only. `cmake/Dependencies.cmake` downloads each one at a pinned version and checks its SHA-256 ✔. |
 | Tensor exchange (R-4.4) | Python to C++: `torch.save(dict)`, then `torch::pickle_load` ✔. C++ to Python: `torch::pickle_save`, then `torch.load` with one allowed name, `torch.jit._pickle.restore_type_tag` ✔. The helper `course/py/io.py` holds this setting. | No other library is necessary. |
 | Mixed precision | `at::autocast` with `bfloat16` on the graphics processor ✔ | Same speed-up as the reference. |
-| Package for the graphics processor | PyTorch 2.15.0 `cu132` (CUDA 13.2). It needs driver 580 or above; the machine has 595. | The 3090 tests of this document used the 2.9.1 package on the machine. The CPU tests used 2.15.0. |
+| Package for the graphics processor | PyTorch 2.15.0 `cu132` (CUDA 13.2), from PyPI ✔. It needs driver 580 or above; the machine has 595. | The smoke test of M0 runs LibTorch 2.15.0 on the 3090 from C++ ✔. |
 | What LibTorch has | AdamW, gradient clip, the attention operator `torch::scaled_dot_product_attention` ✔, the autocast switches ✔, a data loader | The lessons use them. |
 | What LibTorch lacks | An RMSNorm module, a cosine schedule, an autocast guard | The student writes them (L03, L08). |
 
 ### Machine traps and their control
 
-These three faults were found by test ✔. The build files of the course
-prevent them.
+These four faults were found by test ✔. The build files of the course
+prevent the first three; the README warns about the fourth.
 
 | Trap | Effect | Control |
 |------|--------|---------|
 | The shell exports `TORCH_ROOT`, which points to an old PyTorch 2.9.1. | `find_package(Torch)` takes the old library and ignores `CMAKE_PREFIX_PATH`. | The course does not call `find_package(Torch)`. |
 | `find_package(Torch)` of a build for the graphics processor starts the CUDA compiler. The CUDA 12.4 and 12.8 toolkits on the machine refuse GCC 15 and Clang 21, and fail on the headers of the system C library. | The configure step fails. | Same control. No CUDA toolkit is necessary: the PyTorch package brings its CUDA libraries. |
 | A global `CMAKE_CXX_STANDARD 23` goes into the CUDA probe. | The configure step fails. | The standard is set for each target: `target_compile_features(<target> PRIVATE cxx_std_23)`. |
+| The shell exports `UV_PROJECT_ENVIRONMENT`, which points to the environment of a different project. | `uv sync` installs this project there and replaces what was there. `.venv/` stays empty and CMake finds no LibTorch. | Unset the variable before `uv sync`. The README says so; the error text of `cmake/LibTorch.cmake` says to run `uv sync`. |
 
 The control is one file, `cmake/LibTorch.cmake`. It makes an interface
-target from the two folders of the package. This text ran on the graphics
-processor with the two compilers ✔. That run used the PyTorch 2.9.1
-package that is on the machine. Milestone M0 repeats it with 2.15.0:
+target from the two folders of the package. This text runs on the graphics
+processor with the two compilers and PyTorch 2.15.0 ✔ (smoke test of M0):
 
 ```cmake
 set(LIBTORCH_DIR "" CACHE PATH "The torch/ folder of the PyTorch package")
@@ -65,18 +65,19 @@ LLM_from_scratch/
 ├── AGENTS.md  README.md  plans.csv
 ├── plans/                     plans, named by rule 6
 ├── docs/                      requirements.md, specification.md, img/
-├── CMakeLists.txt  CMakePresets.json  cmake/LibTorch.cmake
+├── CMakeLists.txt  CMakePresets.json
+├── cmake/                     LibTorch.cmake, Dependencies.cmake, Course.cmake (options, test helper)
 ├── pyproject.toml  uv.lock    reference environment; it holds LibTorch
 ├── course/                    shared parts, written by the course
-│   ├── cpp/                   golden reader, tensor compare, argument parser, CSV log
-│   └── py/                    golden writer, seed, data readers
+│   ├── cpp/                   golden reader, tensor compare, argument parser, CSV log, tests/
+│   └── py/                    io.py (golden writer, seed), jsonl.py, smoke.py
 ├── tools/                     fetch_data.py, make_goldens.py, export_weights.py, plot_curves.py
 ├── LLM/                       block 1: L01_… to L12_…, apps/, curves/, README.md
 ├── VLM/                       block 2: V01_… to V11_…, apps/, curves/, README.md
 ├── VLA/                       block 3: A01_… to A12_…, apps/, curves/, README.md
 ├── Reasoning/                 block 4
 ├── DiffusionVL/               block 5, reserved
-├── data/                      not in git: data sets, token files, pre-trained weights
+├── data/                      not in git: data sets, token files, pre-trained weights, goldens/
 └── runs/                      not in git: checkpoints and logs of training runs
 ```
 
@@ -102,7 +103,7 @@ LLM/L05_attention/
 |------|--------|------|
 | Lesson page `README.md` | course | 60 lines maximum. Order: picture (SVG), idea (10 lines of mathematics maximum), "You write", "Check" (the test command), "Sources" (file and line in the two source courses). |
 | Python reference `.py` | course | Complete and runs. 150 lines maximum for each lesson. Imports: `torch`, the standard library, and earlier lessons. A comment gives the shape at each tensor line. No option that the lesson does not teach. |
-| Golden file | generated | The reference writes it with a fixed seed: input, weights, output. It is not in git. `tools/make_goldens.py` makes all of them. |
+| Golden file | generated | The function `make_golden(out)` of the reference writes it with a fixed seed: input, weights, output. It goes to `data/goldens/<block>/<lesson>/`, not into git. `tools/make_goldens.py` makes all of them; CTest runs it before each test (fixture `goldens`) and it does no work when no reference changed. |
 | C++ interface `.hpp` | course | Declarations only. Each function has a doc comment: purpose, shapes, behaviour, limits. |
 | C++ bodies `.cpp` | **student** | Each body starts as `COURSE_TODO("name");`. This macro throws `course::NotImplemented`. |
 | C++ test `_test.cpp` | course | Red before the student writes the body: the report is `not implemented: name`. Green after. |

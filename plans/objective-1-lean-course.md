@@ -121,7 +121,7 @@ processor.
 | The VLA metric is open loop. | A low error does not prove good driving. | Said plainly in the specification, S-7. A closed-loop test is a subject for block 4 or for decision D1. |
 | The temporary C++ solutions make the work of the implementing agent larger. | A milestone takes longer. | Accepted: it is the only proof that a test can pass (R-3.8). |
 | PyTorch changes. | The reference and LibTorch are not the same version. | The lock file pins 2.15.0. LibTorch comes from the same package. |
-| The 2.15.0 package for the graphics processor is not tested on the machine. | The build of M0 needs a correction. | It is the first step of M0. The package needs driver 580 or above; the machine has 595. |
+| The 2.15.0 package for the graphics processor is not tested on the machine. | The build of M0 needs a correction. | Closed by M0: the smoke test runs LibTorch 2.15.0 on the 3090 with Clang and with GCC. |
 | The stories of the pre-training have few words for images. | The VLM learns slowly. | The pre-training adds the caption text of the block 2 data. Stage 2 can train more LLM blocks; the reference run decides. |
 | A data set changes its licence or its access. | A run has no data. | `tools/fetch_data.py` pins the revision of each data set. The specification, S-10, records each licence. The image data of block 2 is for study only. |
 
